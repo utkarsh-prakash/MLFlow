@@ -1,0 +1,5 @@
+Any report like model.summary or classification_report can be saved as a text file by using mlflow.log_artifact()
+
+When we run autolog on tensorflow models, it automatically saves tensorboard logs, i.e we can see history graphs of model training using
+tensorboard --logdir mlruns\0\b2883b645d6647f89049bf91b447c288\artifacts\tensorboard_logs\
+

@@ -19,4 +19,45 @@ mlflow.sklearn.autolog()
     mlflow.log_metric("Accuracy", acc) - To log evaluation metrics
     mlflow.log_artifact(heatmap) - To log artifacts like images and graphs
     ps - dont forget to log model while doing custom logging. mlflow.sklearn.log_model(rf, "Model")
-    These examples can be found in autolog_ml and customlog_ml_cls
+    These examples can be found in autolog_ml and customlog_ml
+
+Registering a model on MLFlow sqlite
+    mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./artifacts --host 0.0.0.0
+    by this command we specify that we want to run a sqlite db to store all the metrices and hyperparameters
+    these things are stored in a much more organised way here
+    but artifacts cant be stored into sql databases. So those will be stored on ./artifacts folder.
+    
+    setting server URI
+    remote_server_uri = "http://LAPTOP-1TDJG2I3:5000" 
+    mlflow.set_tracking_uri(remote_server_uri)
+    we can give in some non local server also
+    
+    mlflow.set_experiment("/Experiment_2")
+    optional - sets the experiment name, there can be multiple runs/models under an experiment
+    
+    tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+    # Model registry does not work with file store
+    if tracking_url_type_store != "file":
+        mlflow.sklearn.log_model(lr, "model", registered_model_name="ElasticnetWineModel")
+    else:
+        mlflow.sklearn.log_model(lr, "model")
+    If we are using sqlite backend we can go ahead with model registry.
+    registered_model_name="ElasticnetWineModel" : There will be multiple versions of this model if runs are with same name
+    
+    After all this we can go to models section of mlflow ui and look at all the registered model
+    we can push these models to staging and production once they are registered.
+    While sqlite server is running, registered model in production/staging can be used for serving
+    
+    ps - use sqlite browser for windows to look at the organised metrics table.
+    example code at : custom_ml_reg.py
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
