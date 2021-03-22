@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/Educational/MLFlow/ML/mlruns/0/fd4e2a237ba94a5e8fd6e26e7bcacc70/artifacts
+end_time: 1616396599329
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: fd4e2a237ba94a5e8fd6e26e7bcacc70
+run_uuid: fd4e2a237ba94a5e8fd6e26e7bcacc70
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1616396590989
+status: 3
+tags: []
+user_id: Utkarsh

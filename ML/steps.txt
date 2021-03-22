@@ -1,0 +1,22 @@
+python autolog.py 0.9 0.1
+    try with different l1_ratio and alpha values to get multiple runs and multiple models.
+
+mlflow ui
+    runs app on localhost where we can compare runs with the parameters that we logged.
+    MLflow also stores the yaml file for the conda environment required to run the model.
+
+mlflow models serve -m runs:/a0dada4ac09c4ca597cc815f9491549a/model
+    once sure of model we want to serve with we can use this to serve the model on localhost
+
+curl -X POST -H "Content-Type:application/json; format=pandas-split" --data "{\"columns\":[\"alcohol\", \"chlorides\", \"citric acid\", \"density\", \"fixed acidity\", \"free sulfur dioxide\", \"pH\", \"residual sugar\", \"sulphates\", \"total sulfur dioxide\", \"volatile acidity\"],\"data\":[[12.8, 0.029, 0.48, 0.98, 6.2, 29, 3.33, 1.2, 0.39, 75, 0.66]]}" http://127.0.0.1:5000/invocations
+    We can use curl commands to get response from the servig model.
+    We can use postman also
+
+mlflow.sklearn.autolog()
+    This will log all the parameters and metrics for an sklearn model by default, it also logs and stores the model
+    If we dont use autolog (because autolog stores too much info) we can do custom logging.
+    mlflow.log_param("Estimators", num_estimators) - To log hyperparameters
+    mlflow.log_metric("Accuracy", acc) - To log evaluation metrics
+    mlflow.log_artifact(heatmap) - To log artifacts like images and graphs
+    ps - dont forget to log model while doing custom logging. mlflow.sklearn.log_model(rf, "Model")
+    These examples can be found in autolog_ml and customlog_ml_cls
